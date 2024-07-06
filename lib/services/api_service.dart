@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   final String apiUrl = 'https://app.timbu.cloud/api/products';
-  final String apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+  final String apiKey = '5e0b6f9d95b040a380f683e8b57ea03420240704190137292988';
 
   Future<List<Product>> fetchProducts() async {
     try {

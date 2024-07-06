@@ -1,17 +1,26 @@
 class Product {
   final String name;
-  final String imageUrl;
-  final double price;
   final String currency;
+  final int quantityAvailable;
+  final double buyingPrice;
+  final double sellingPrice;
 
-  Product({required this.name, required this.imageUrl, required this.price, required this.currency});
+  Product({
+    required this.name,
+    required this.currency,
+    required this.quantityAvailable,
+    required this.buyingPrice,
+    required this.sellingPrice,
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       name: json['name'],
-      imageUrl: json['imageUrl'] ?? '',
-      price: json['price'].toDouble(),
       currency: json['currency'],
+      quantityAvailable: json['quantityAvailable'],
+      buyingPrice: json['buyingPrice'],
+      sellingPrice: json['sellingPrice'],
     );
   }
+
 }

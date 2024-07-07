@@ -40,8 +40,8 @@ class _ProductListPageState extends State<ProductListPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 const img = "http://api.timbu.cloud/images/";
-                String imageUrl = '$img${product.photos[0]["url]}';
                 var product = snapshot.data![index];
+                String imageUrl = '$img${product.photos[0]["url"]}';
                 final priceList = product.currentPrice;
                 String price = 'Price not available';
                 if (priceList != null) {
@@ -52,7 +52,7 @@ class _ProductListPageState extends State<ProductListPage> {
                 }
                 return ListTile(
                   leading: CachedNetworkImage(
-                      imageUrl: product.photos,
+                      imageUrl: imageUrl,
                     placeholder: (context, url) =>
                         CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dok_store/models/products.dart';
+import 'package:dok_store/provider/product_provider.dart';
 import 'package:dok_store/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class _ProductListPageState extends State<ProductListPage> {
 
   @override
   Widget build(BuildContext context) {
+   var provider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Products'),
@@ -37,18 +39,20 @@ class _ProductListPageState extends State<ProductListPage> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
+                const img = "http://api.timbu.cloud/images/";
+                String imageUrl = '$img${product.photos[0]["url]}';
                 var product = snapshot.data![index];
                 final priceList = product.currentPrice;
                 String price = 'Price not available';
-                if (priceList != null && priceList.isNotEmpty) {
-                  final ngnPrices = priceList[0]['NGN'];
+                if (priceList != null) {
+                  final ngnPrices = priceList[0]['NGN'][0];
                   if (ngnPrices != null && ngnPrices.isNotEmpty) {
-                    price = 'NGN ${ngnPrices[0].toString()}';
+                    price = 'NGN ${ngnPrices.toString()}';
                   }
                 }
                 return ListTile(
                   leading: CachedNetworkImage(
-                      imageUrl: product.imageUrl,
+                      imageUrl: product.photos,
                     placeholder: (context, url) =>
                         CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>

@@ -1,9 +1,9 @@
 class Product {
   final String name;
   final String currency;
-  final String imageUrl;
+  final List<dynamic> imageUrl;
   final int quantityAvailable;
-  final double buyingPrice;
+  final List<dynamic> currentPrice;
   final double sellingPrice;
 
   Product({
@@ -11,7 +11,7 @@ class Product {
     required this.currency,
     required this.imageUrl,
     required this.quantityAvailable,
-    required this.buyingPrice,
+    required this.currentPrice,
     required this.sellingPrice,
   });
 
@@ -19,9 +19,9 @@ class Product {
     return Product(
       name: json['name'],
       currency: json['currency'],
-      imageUrl: json['imageUrl'],
+      imageUrl: json['photos'],
       quantityAvailable: json['quantityAvailable'],
-      buyingPrice: json['buyingPrice'],
+      currentPrice: json['current_Price'],
       sellingPrice: json['sellingPrice'],
     );
   }

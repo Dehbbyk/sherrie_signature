@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dok_store/models/products.dart';
 import 'package:dok_store/services/api_service.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,13 @@ class _ProductListPageState extends State<ProductListPage> {
                   }
                 }
                 return ListTile(
+                  leading: CachedNetworkImage(
+                      imageUrl: product.imageUrl,
+                    placeholder: (context, url) =>
+                        CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Icon(Icons.error),
+                  ),
                   title: Text(product.name),
                   subtitle: Text(price),
                 );

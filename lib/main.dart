@@ -23,86 +23,26 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class MyHomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final productProvider = Provider.of<ProductProvider>(context);
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('DOK Stores'),
-//       ),
-//       body: Center(
-//           child: productProvider.isLoading
-//           ? CircularProgressIndicator()
-//               : productProvider.data.isNotEmpty
-//           ? ProductListPage()
-//           ListView.builder(
-//             itemCount: productProvider.data.length,
-//             itemBuilder: (context, index) {
-//               var product = productProvider.data[index];
-//               return ListTile(
-//                 title: Text(product.name),
-//                 subtitle: Text('${product.currency} ${product.sellingPrice}'),
-//               );
-//             },
-//           )
-//               : ElevatedButton(
-//                 onPressed: () {
-//                 productProvider.fetchData();
-//                 },
-//                   child: Text('Fetch Products'),
-//       ),
-//       ),
-//     );
-//   }
-// }
-class ProductListPage extends StatefulWidget {
-  @override
-  _ProductListPageState createState() => _ProductListPageState();
-}
-
-class _ProductListPageState extends State<ProductListPage> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<ProductProvider>(context, listen: false).fetchData();
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ProductProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Products'),
+        title: Text('DOK Stores'),
       ),
-      body: provider.isLoading
-          ? Center(child: CircularProgressIndicator())
-          : provider.data.isEmpty
-          ? Center(child: Text('No products available'))
-          : ListView.builder(
-        itemCount: provider.data.length,
-        itemBuilder: (context, index) {
-          const img = "http://api.timbu.cloud/images/";
-          var product = provider.data[index];
-          String imageUrl ='$img${product?["photos"]?[0]?["url"]}';
-          String ngnPrices = product?["current_price"]?[0]?["NGN"] ;
-          String price = 'Price not available';
-          if (ngnPrices != null && ngnPrices.isNotEmpty) {
-            price = 'NGN ${ngnPrices[0].toString()}';
-          }
-          String productName = product?["name"];
-          return ListTile(
-            leading: CachedNetworkImage(
-              imageUrl: imageUrl,
-              placeholder: (context, url) =>
-                  CircularProgressIndicator(),
-              errorWidget: (context, url, error) =>
-                  Icon(Icons.error),
-            ),
-            title: Text(productName),
-            subtitle: Text(price),
-          );
-        },
+      body: Center(
+          child: productProvider.isLoading
+          ? CircularProgressIndicator()
+              : productProvider.data.isNotEmpty
+          ? ProductListPage()
+
+              : ElevatedButton(
+                onPressed: () {
+                productProvider.fetchData();
+                },
+                  child: Text('Fetch Products'),
+      ),
       ),
     );
   }

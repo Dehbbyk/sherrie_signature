@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dok_store/models/products.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 class ApiService {
@@ -6,7 +7,7 @@ class ApiService {
   final String apiKey = '5e0b6f9d95b040a380f683e8b57ea03420240704190137292988';
   final String appId = 'BODV38H42OCLMGE';
   final organizationId = 'ca2260578d7d4744a491ed7cce125698';
-  Future<List<dynamic>> fetchData() async {
+  Future<List<Product>> fetchProduct() async {
     final queryParams = {
       'organization_id': organizationId,
       "reverse_sort":"false",
@@ -15,14 +16,19 @@ class ApiService {
       'ApiKey': apiKey,
       'Appid': appId,
     };
-    final uri = Uri.https(baseUrl, '/products', queryParams);
+    final uri = Uri.parse(
+        '$baseUrl?organization_id=$organizationId&reverse_sort=false&page=1&size=10&Appid=$appId&Apikey=$apiKey');
+    print('Fetching product from: $uri');
+    final response = await http.get(uri);
     try{
-      final response = await http.get(uri);
       if (response.statusCode == 200) {
-        final decodedResponse= json.decode(response.body);
-        return decodedResponse["items"];
+        List<dynamic> items = json.decode(response.body)['items'];
+        print('Fetched products: $items');
+        return items.map((item) => Product.fromJson(item)).toList();
       } else {
-        throw Exception('Failed to load data');
+        List<dynamic> items = json.decode(response.body)['items'];
+        print('Fetched products: $items');
+        return items.map((item) => Product.fromJson(item)).toList();
       }
     }catch(error){
       if(kIsWeb){

@@ -34,12 +34,12 @@ class MyHomePage extends StatelessWidget {
       body: Center(
           child: productProvider.isLoading
           ? CircularProgressIndicator()
-              : productProvider.data.isNotEmpty
+              : productProvider.product.isNotEmpty
           ? ProductListPage()
 
               : ElevatedButton(
                 onPressed: () {
-                productProvider.fetchData();
+                productProvider.fetchProduct();
                 },
                   child: Text('Fetch Products'),
       ),

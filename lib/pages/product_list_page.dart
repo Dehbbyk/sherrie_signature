@@ -12,7 +12,7 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProductProvider>(context, listen: false).fetchData();
+    Provider.of<ProductProvider>(context, listen: false).fetchProduct();
   }
 
   @override
@@ -24,13 +24,13 @@ class _ProductListPageState extends State<ProductListPage> {
       ),
       body: provider.isLoading
           ? Center(child: CircularProgressIndicator())
-          : provider.data.isEmpty
+          : provider.product.isEmpty
           ? Center(child: Text('No products available'))
           : ListView.builder(
-          itemCount: provider.data.length,
+          itemCount: provider.product.length,
           itemBuilder: (context, index) {
             const img = "http://api.timbu.cloud/images/";
-            var product = provider.data[index];
+            var product = provider.product[index];
             String imageUrl ='$img${product?["photos"]?[0]?["url"]}';
             String ngnPrices = product?["current_price"]?[0]?["NGN"] ;
             String price = 'Price not available';

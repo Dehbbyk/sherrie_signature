@@ -19,7 +19,7 @@ class Product {
     return Product(
       name: json['name'],
       currency: json['currency'],
-      photos: json['photos'],
+      photos: json['photos'] ,
       quantityAvailable: json['quantityAvailable'],
       currentPrice: json['current_Price'],
       sellingPrice: json['sellingPrice'],

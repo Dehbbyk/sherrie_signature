@@ -1,31 +1,25 @@
-import 'package:dok_store/models/products.dart';
 import 'package:dok_store/services/api_service.dart';
 import 'package:flutter/material.dart';
-
-
-class ProductProvider extends ChangeNotifier {
-  List<Product> _products = [];
+class ProductProvider with ChangeNotifier {
+  final ApiService apiService;
+  List< dynamic> _data = [];
   bool _isLoading = false;
-  String _errorMessage = '';
-
-  List<Product> get products => _products;
+  ProductProvider(this.apiService);
+  List<dynamic> get data => _data;
   bool get isLoading => _isLoading;
-  String get errorMessage => _errorMessage;
-
-  final ApiService _productService = ApiService();
-
-  Future<void> fetchProducts() async {
+  Future<void> fetchData() async {
     _isLoading = true;
     notifyListeners();
-
     try {
-      _products = await _productService.fetchProducts();
-      _errorMessage = '';
-    } catch (e) {
-      _errorMessage = e.toString();
+      _data = await apiService.fetchData();
+      notifyListeners();
+    } catch (error) {
+      debugPrint('Error fetching data: $error');
+      _data = [];
     } finally {
       _isLoading = false;
       notifyListeners();
+      debugPrint('Loading state: $_isLoading');
     }
   }
 }

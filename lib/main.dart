@@ -1,31 +1,108 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dok_store/pages/product_list_page.dart';
 import 'package:dok_store/provider/product_provider.dart';
+import 'package:dok_store/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  final apiService = ApiService();
   runApp(
-      MyApp()
+    ChangeNotifierProvider(
+      create: (context) => ProductProvider(apiService),
+      child: MyApp(),
+    ),
   );
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-        create: (context) => ProductProvider()),
-      ],
-        child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-          title: 'DOK Store',
-          theme: ThemeData(
-          primaryColor: Colors.blue,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          scaffoldBackgroundColor: Colors.grey.shade100
-          ),
-          home: ProductListPage(),
+    return MaterialApp(
+      home: ProductListPage(),
+    );
+  }
+}
+
+// class MyHomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final productProvider = Provider.of<ProductProvider>(context);
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('DOK Stores'),
+//       ),
+//       body: Center(
+//           child: productProvider.isLoading
+//           ? CircularProgressIndicator()
+//               : productProvider.data.isNotEmpty
+//           ? ProductListPage()
+//           ListView.builder(
+//             itemCount: productProvider.data.length,
+//             itemBuilder: (context, index) {
+//               var product = productProvider.data[index];
+//               return ListTile(
+//                 title: Text(product.name),
+//                 subtitle: Text('${product.currency} ${product.sellingPrice}'),
+//               );
+//             },
+//           )
+//               : ElevatedButton(
+//                 onPressed: () {
+//                 productProvider.fetchData();
+//                 },
+//                   child: Text('Fetch Products'),
+//       ),
+//       ),
+//     );
+//   }
+// }
+class ProductListPage extends StatefulWidget {
+  @override
+  _ProductListPageState createState() => _ProductListPageState();
+}
+
+class _ProductListPageState extends State<ProductListPage> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<ProductProvider>(context, listen: false).fetchData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var provider = Provider.of<ProductProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Products'),
+      ),
+      body: provider.isLoading
+          ? Center(child: CircularProgressIndicator())
+          : provider.data.isEmpty
+          ? Center(child: Text('No products available'))
+          : ListView.builder(
+        itemCount: provider.data.length,
+        itemBuilder: (context, index) {
+          const img = "http://api.timbu.cloud/images/";
+          var product = provider.data[index];
+          String imageUrl ='$img${product?["photos"]?[0]?["url"]}';
+          String ngnPrices = product?["current_price"]?[0]?["NGN"] ;
+          String price = 'Price not available';
+          if (ngnPrices != null && ngnPrices.isNotEmpty) {
+            price = 'NGN ${ngnPrices[0].toString()}';
+          }
+          String productName = product?["name"];
+          return ListTile(
+            leading: CachedNetworkImage(
+              imageUrl: imageUrl,
+              placeholder: (context, url) =>
+                  CircularProgressIndicator(),
+              errorWidget: (context, url, error) =>
+                  Icon(Icons.error),
+            ),
+            title: Text(productName),
+            subtitle: Text(price),
+          );
+        },
       ),
     );
   }

@@ -7,7 +7,7 @@ class ApiService {
   final String apiKey = '5e0b6f9d95b040a380f683e8b57ea03420240704190137292988';
   final String appId = 'BODV38H42OCLMGE';
   final organizationId = 'ca2260578d7d4744a491ed7cce125698';
-  Future<List<Product>> fetchProduct() async {
+  Future<List<dynamic>> fetchProduct() async {
     final queryParams = {
       'organization_id': organizationId,
       "reverse_sort":"false",
@@ -22,9 +22,8 @@ class ApiService {
     final response = await http.get(uri);
     try{
       if (response.statusCode == 200) {
-        List<dynamic> items = json.decode(response.body)['items'];
-        print('Fetched products: $items');
-        return items.map((item) => Product.fromJson(item)).toList();
+        var item= json.decode(response.body);
+        return item['items'];
       } else {
         List<dynamic> items = json.decode(response.body)['items'];
         print('Fetched products: $items');

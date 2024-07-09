@@ -14,10 +14,10 @@ Loading State: Show a loading indicator while fetching data from the API.
 The attached screenshot is the Product list screen identifying various available products.
 
 ## APK Download
-Download the APK file to install the app on your Android device: [APK Download Link]([https://your-apk-download-link](https://appetize.io/app/b_ocpu6644narf5tdokqcpukq4ve))
+Download the APK file to install the app on your Android device: [APK Download Link](https://drive.google.com/drive/folders/11hG8Tp-xxkOCcf1UkdIq69sQ8gexjlwc?usp=sharing)
 
 ## Demo
-Check out the demo of the app on Appetize.io: [Appetize.io Demo Link(![image])
+Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]](https://appetize.io/app/b_ocpu6644narf5tdokqcpukq4ve))
 
 ## Setup Instructions
   Clone the repository

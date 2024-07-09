@@ -17,7 +17,7 @@ The attached screenshot is the Product list screen identifying various available
 Download the APK file to install the app on your Android device: [APK Download Link](https://your-apk-download-link)
 
 ## Demo
-Check out the demo of the app on Appetize.io: [Appetize.io Demo Link](https://appetize.io/link-to-your-app)
+Check out the demo of the app on Appetize.io: [Appetize.io Demo Link](![image](https://github.com/Dehbbyk/dok_store/assets/149065007/a13dffff-249a-4340-a343-441bb925d80c))
 
 ## Setup Instructions
   Clone the repository
@@ -27,7 +27,7 @@ cached_network_image: For displaying images from the network with caching.
   Set up your Timbu API key:
 Create a Timbu account on Timbu.cloud.
 Get your API key (it only views once) and add some product information under Retail Business.
-Run the app
+## Run the app
 
 
 ## Contact

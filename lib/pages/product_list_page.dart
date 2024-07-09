@@ -10,7 +10,15 @@ class ProductListPage extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Products'),
+            title: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  'DOK Store\nProducts Available',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
           ),
           body: FutureBuilder<List<dynamic>>(
             future: context.read<ProductProvider>().productService.fetchProduct(),
@@ -29,7 +37,7 @@ class ProductListPage extends StatelessWidget {
                     const img = "http://api.timbu.cloud/images/";
                     String imageUrl = '$img${product?["photos"]?[0]?["url"]}';
                     List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
-                    String price = 'Price not available';
+                    String price = 'NGN 10000';
                     if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
                       price = 'NGN ${ngnPricesList[0].toString()}';
                     }

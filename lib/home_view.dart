@@ -1,8 +1,8 @@
-import 'package:dok_store/pages/product_list_page.dart';
-import 'package:dok_store/pages/profile_page.dart';
-import 'package:dok_store/pages/search_page.dart';
-import 'package:dok_store/pages/wish_list.dart';
 import 'package:flutter/material.dart';
+import 'package:sherrie_signature/pages/product_list_page.dart';
+import 'package:sherrie_signature/pages/profile_page.dart';
+import 'package:sherrie_signature/pages/search_page.dart';
+import 'package:sherrie_signature/pages/wish_list.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -40,7 +40,8 @@ class _HomeViewState extends State<HomeView> {
           label: "Home"
         ),
         BottomNavigationBarItem(
-        icon: Icon(Icons.heart_broken),
+        icon: Icon(Icons.heart_broken_sharp
+        ),
         label: "Wishlist"
       ),
           BottomNavigationBarItem(

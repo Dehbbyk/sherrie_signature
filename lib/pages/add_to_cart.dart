@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dok_store/pages/cart_page.dart';
-import 'package:dok_store/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sherrie_signature/pages/cart_page.dart';
+import 'package:sherrie_signature/provider/product_provider.dart';
 
 class AddToCartPage extends StatefulWidget {
   const AddToCartPage({super.key});

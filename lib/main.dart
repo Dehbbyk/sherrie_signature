@@ -1,11 +1,8 @@
-import 'package:dok_store/pages/home_page.dart';
-import 'package:dok_store/pages/add_to_cart.dart';
-import 'package:dok_store/pages/product_description_page.dart';
-import 'package:dok_store/pages/product_list_page.dart';
-import 'package:dok_store/provider/product_provider.dart';
-import 'package:dok_store/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sherrie_signature/home_view.dart';
+import 'package:sherrie_signature/provider/product_provider.dart';
+import 'package:sherrie_signature/services/api_service.dart';
 
 void main() {
   final apiService = ApiService();
@@ -20,7 +17,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ProductProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ProductListPage()
+        home: HomeView()
       ),
     );
   }

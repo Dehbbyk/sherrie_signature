@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dok_store/pages/add_to_cart.dart';
-import 'package:dok_store/pages/empty_cart.dart';
-import 'package:dok_store/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sherrie_signature/pages/add_to_cart.dart';
+import 'package:sherrie_signature/pages/empty_cart.dart';
+import 'package:sherrie_signature/provider/product_provider.dart';
 
 class ProductDescriptionPage extends StatelessWidget {
   const ProductDescriptionPage({super.key});

@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dok_store/pages/add_to_cart.dart';
-import 'package:dok_store/pages/empty_cart.dart';
-import 'package:dok_store/pages/product_description_page.dart';
-import 'package:dok_store/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sherrie_signature/pages/empty_cart.dart';
+import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/provider/product_provider.dart';
 
 class ProductListPage extends StatelessWidget {
   @override
@@ -101,7 +100,6 @@ class ProductListPage extends StatelessWidget {
                           }
                           categorizedProducts[category]!.add(product);
                         }
-
                         return ListView(
                           children: categorizedProducts.entries.map((entry) {
                             String category = entry.key;
@@ -133,7 +131,7 @@ class ProductListPage extends StatelessWidget {
                                         const img = "http://api.timbu.cloud/images/";
                                         String imageUrl = '$img${product?["photos"]?[0]?["url"] ?? ''}';
                                         List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
-                                        String price = 'LRD 10000';
+                                        String price = 'LRD 100';
                                         if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
                                           price = 'LRD ${ngnPricesList[0].toString()}';
                                         }

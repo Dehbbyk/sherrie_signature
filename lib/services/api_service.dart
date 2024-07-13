@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:dok_store/models/products.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'package:sherrie_signature/models/products.dart';
 class ApiService {
   final String baseUrl = 'https://api.timbu.cloud/products';
   final String apiKey = '5e0b6f9d95b040a380f683e8b57ea03420240704190137292988';

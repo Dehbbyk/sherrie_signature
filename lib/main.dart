@@ -1,3 +1,6 @@
+import 'package:dok_store/pages/home_page.dart';
+import 'package:dok_store/pages/add_to_cart.dart';
+import 'package:dok_store/pages/product_description_page.dart';
 import 'package:dok_store/pages/product_list_page.dart';
 import 'package:dok_store/provider/product_provider.dart';
 import 'package:dok_store/services/api_service.dart';
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ProductProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ProductListPage(),
+        home: ProductListPage()
       ),
     );
   }

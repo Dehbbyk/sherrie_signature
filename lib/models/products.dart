@@ -5,6 +5,8 @@ class Product {
   final int quantityAvailable;
   final List<dynamic> currentPrice;
   final double sellingPrice;
+  final String description;
+  final String category;
 
   Product({
     required this.name,
@@ -13,6 +15,8 @@ class Product {
     required this.quantityAvailable,
     required this.currentPrice,
     required this.sellingPrice,
+    required this. description,
+    required this. category
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class Product {
       quantityAvailable: json['quantityAvailable'],
       currentPrice: json['current_Price'],
       sellingPrice: json['sellingPrice'],
+      description: json['description'],
+      category: json['category']
     );
   }
 

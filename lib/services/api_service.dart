@@ -7,6 +7,8 @@ class ApiService {
   final String apiKey = '5e0b6f9d95b040a380f683e8b57ea03420240704190137292988';
   final String appId = 'BODV38H42OCLMGE';
   final organizationId = 'ca2260578d7d4744a491ed7cce125698';
+  final String categoryUrl = 'https://api.timbu.cloud/categories';
+
   Future<List<dynamic>> fetchProduct() async {
     final queryParams = {
       'organization_id': organizationId,
@@ -35,5 +37,4 @@ class ApiService {
         throw Exception ('Failed to load data: ${error.toString()}');
       }
     }
-  }
-}
+  }}

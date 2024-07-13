@@ -1,4 +1,4 @@
-# dok_store
+# sherrie_signature
 
 Dok Store is a mobile application that displays a list of products fetched from the Timbu API. 
 The app showcases product images and prices, in a user-friendly interface.

@@ -11,14 +11,25 @@ This is a shopping app built with flutter. The app allows users to browse produc
 
 ## Screenshot
 - ![image](![home](![image](https://github.com/user-attachments/assets/a0d33623-ca9f-4548-ac7b-d62c295f7401)
+
+  
 This is the image of the home view. The home view is still under construction due to inability to fecth categorized products from the timbu api.
 ![product description](https://github.com/user-attachments/assets/6824b60f-9662-4e01-b32e-a1ae42c5c268)
+
+
 Product description showing details of the each product. You can navigate to this page by clicking on the "ADD TO CART' on each product fron the home page
 ![add to cart](https://github.com/user-attachments/assets/e32c5356-d76f-41df-9eb0-c151340f92d9)
+
+
 You can add your products here as well as click the empty cart at the right hand corner to navigate you to the another screen
 ![empty cart](https://github.com/user-attachments/assets/8b6f0e19-df97-4584-abae-b00a5c63814e)
+
+
+
 Empty cart, displaying that no product has been added yet. Click on the empty cart icon on the product description page to access this page.
 ![checkout cart](https://github.com/user-attachments/assets/3c248ccb-99ed-42f7-a7ba-aff22273fe38)
+
+
 This is the checkout page, from the add to cart page you click checkout to check out the products you've purchased.
 
 

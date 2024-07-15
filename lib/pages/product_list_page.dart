@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class ProductListPage extends StatelessWidget {
@@ -80,6 +81,7 @@ class ProductListPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                JustForYouSlider(),
                 Expanded(
                   child: FutureBuilder<List<dynamic>>(
                     future: context.read<ProductProvider>().productService.fetchProduct(),
@@ -122,7 +124,8 @@ class ProductListPage extends StatelessWidget {
                                   ),
                                   SizedBox(height: 8),
                                   Container(
-                                    height: 200, // Adjust height as needed
+                                    height: 200,
+                                    // Adjust height as needed
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: products.length,

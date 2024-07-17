@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/pages/product_list_page.dart';
+import 'package:sherrie_signature/provider/product_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class EmptyCartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenHeight = mediaQuery.size.height;
+    final screenWidth = mediaQuery.size.width;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -52,7 +60,10 @@ class EmptyCartPage extends StatelessWidget {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle start shopping button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProductListPage()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -90,97 +101,119 @@ class EmptyCartPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                      'View all',
+                    'View all',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      color: Colors.green
+                      color: Colors.green,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             SizedBox(height: 8),
             Container(
               height: 300,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  RecentlyViewedItem(
-                    imageUrl: 'http://api.timbu.cloud/images/',
-                    name: 'Repair Scrub',
-                    price: 19.00,
-                  ),
-                  // Add more RecentlyViewedItem widgets here
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+              child: FutureBuilder<List<dynamic>>(
+                future: context.read<ProductProvider>().productService.fetchProduct(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('No products available.'));
+                  } else {
+                    List<dynamic> recentlyViewed = snapshot.data!
+                        .where((product) => product['categories'] != null &&
+                        product['categories'].any((category) => category['name'] == 'recently viewed'))
+                        .toList();
 
-class RecentlyViewedItem extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final double price;
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.75,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                      ),
+                      itemCount: recentlyViewed.length,
+                      itemBuilder: (context, index) {
+                        var product = recentlyViewed[index];
+                        const img = "http://api.timbu.cloud/images/";
+                        String imageUrl = '$img${product?["photos"]?[0]?["url"] ?? ''}';
+                        List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
+                        String price = 'LRD 100';
+                        if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
+                          price = 'LRD ${ngnPricesList[0].toString()}';
+                        }
+                        final productName = product["name"] ?? 'Unnamed Product';
 
-  RecentlyViewedItem({
-    required this.imageUrl,
-    required this.name,
-    required this.price,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              imageUrl,
-              width: 160,
-              height: 210,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(height: 8),
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              '\$$price',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600
-              ),
-            ),
-            SizedBox(height: 4),
-            ElevatedButton(
-              onPressed: () {
-                // Handle add to cart button press
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-              child: Text(
-                'Add to cart',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                ),
+                        return Container(
+                          width: screenWidth/2,
+                          margin: EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: imageUrl,
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) => Icon(Icons.error),
+                                height: screenHeight / 8,
+                                width: screenWidth,
+                                fit: BoxFit.cover,
+                              ),
+                              Text(
+                                productName,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    price,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.zero),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductDescriptionPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Add to Cart',
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
               ),
             ),
           ],

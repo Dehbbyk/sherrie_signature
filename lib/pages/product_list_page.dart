@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
 import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
+import 'package:sherrie_signature/pages/widgets/more_product_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class ProductListPage extends StatelessWidget {
@@ -80,7 +81,12 @@ class ProductListPage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => MoreProductsPage()),
+                            );
+                          },
                           icon: Icon(Icons.keyboard_arrow_right))
                     ],
                   ),
@@ -158,8 +164,13 @@ class ProductListPage extends StatelessWidget {
           SizedBox(height: 8),
           Container(
             height: screenHeight / 10,
-            child: ListView.builder(
-              // scrollDirection: Axis.horizontal,
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
               itemCount: products.length,
               itemBuilder: (context, index) {
                 var product = products[index];

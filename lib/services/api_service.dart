@@ -14,12 +14,12 @@ class ApiService {
       'organization_id': organizationId,
       "reverse_sort":"false",
       "page":"1",
-      "size":"10",
+      "size":"20",
       'ApiKey': apiKey,
       'Appid': appId,
     };
     final uri = Uri.parse(
-        '$baseUrl?organization_id=$organizationId&reverse_sort=false&page=1&size=10&Appid=$appId&Apikey=$apiKey');
+        '$baseUrl?organization_id=$organizationId&reverse_sort=false&page=1&size=20&Appid=$appId&Apikey=$apiKey');
     print('Fetching product from: $uri');
     final response = await http.get(uri);
     try{

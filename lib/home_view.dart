@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sherrie_signature/pages/product_list_page.dart';
 import 'package:sherrie_signature/pages/profile_page.dart';
 import 'package:sherrie_signature/pages/search_page.dart';
+import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
 import 'package:sherrie_signature/pages/wish_list.dart';
 
 class HomeView extends StatefulWidget {

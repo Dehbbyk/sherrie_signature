@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/home_view.dart';
+import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 import 'package:sherrie_signature/services/api_service.dart';
 

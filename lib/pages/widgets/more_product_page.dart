@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/pages/wish_list.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class MoreProductsPage extends StatelessWidget {
@@ -45,6 +46,7 @@ class MoreProductsPage extends StatelessWidget {
                       price = 'LRD ${ngnPricesList[0].toString()}';
                     }
                     final productName = product["name"] ?? 'Unnamed Product';
+                    final inWishlist = productProvider.isInWishlist(product);
                     return Container(
                       width: screenWidth / 2,
                       margin: EdgeInsets.symmetric(horizontal: 8.0),
@@ -60,15 +62,49 @@ class MoreProductsPage extends StatelessWidget {
                             width: screenWidth,
                             fit: BoxFit.cover,
                           ),
-                          Text(
-                            productName,
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                productName,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              IconButton(
+                                  onPressed: (){
+                                    if (inWishlist){
+                                      productProvider.removeFromWishlist(product);
+                                    }else{
+                                      productProvider.addToWishlist(product);
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context){
+                                            return AlertDialog(
+                                              content: Text('Product successfully added to your wishlist'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: (){
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                    child: Text('OK'),
+                                                ),
+                                              ]
+                                            );
+                                          }
+                                      );
+                                    }
+                                  },
+                                  icon: Icon(
+                                    inWishlist ? Icons.heart_broken : Icons.heart_broken_outlined,
+                                    color: inWishlist ? Colors.red : null,
+                                  )
+                              )
+                            ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

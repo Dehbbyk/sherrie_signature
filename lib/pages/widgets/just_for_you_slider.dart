@@ -38,7 +38,7 @@ class JustForYouSlider extends StatelessWidget {
                 }
                 final productName = product["name"] ?? 'Unnamed Product';
                 return Container(
-                  width: screenWidth / 2,
+                  width: screenWidth/2,
                   margin: EdgeInsets.symmetric(horizontal: 8.0),
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -49,8 +49,8 @@ class JustForYouSlider extends StatelessWidget {
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
-                        height: screenHeight / 8,
-                        width: screenWidth,
+                        height: 100,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(

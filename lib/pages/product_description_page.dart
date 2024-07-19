@@ -6,7 +6,7 @@ import 'package:sherrie_signature/pages/empty_cart.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class ProductDescriptionPage extends StatelessWidget {
-  const ProductDescriptionPage({super.key});
+  const ProductDescriptionPage({super.key,});
 
   @override
   Widget build(BuildContext context) {

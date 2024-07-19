@@ -12,9 +12,9 @@ class ApiService {
   Future<List<dynamic>> fetchProduct() async {
     final queryParams = {
       'organization_id': organizationId,
-      "reverse_sort":"false",
-      "page":"1",
-      "size":"20",
+      "reverse_sort": "false",
+      "page": "1",
+      "size": "20",
       'ApiKey': apiKey,
       'Appid': appId,
     };
@@ -22,19 +22,50 @@ class ApiService {
         '$baseUrl?organization_id=$organizationId&reverse_sort=false&page=1&size=20&Appid=$appId&Apikey=$apiKey');
     print('Fetching product from: $uri');
     final response = await http.get(uri);
-    try{
+    try {
       if (response.statusCode == 200) {
-        var item= json.decode(response.body);
+        var item = json.decode(response.body);
         return item['items'];
       } else {
         List<dynamic> items = json.decode(response.body)['items'];
         print('Fetched products: $items');
         return items.map((item) => Product.fromJson(item)).toList();
       }
-    }catch(error){
-      if(kIsWeb){
-        throw Exception ('CORS policy error: ${error.toString()}');}else{
-        throw Exception ('Failed to load data: ${error.toString()}');
+    } catch (error) {
+      if (kIsWeb) {
+        throw Exception('CORS policy error: ${error.toString()}');
+      } else {
+        throw Exception('Failed to load data: ${error.toString()}');
       }
     }
-  }}
+  }
+
+  Future<Map<String, dynamic>> fetchOneProduct(String id) async {
+    final queryParams = {
+      'organization_id': organizationId,
+      "reverse_sort": "false",
+      "page": "1",
+      "size": "20",
+      'ApiKey': apiKey,
+      'Appid': appId,
+    };
+    final uri = Uri.parse(
+        '$baseUrl/$id?organization_id=$organizationId&reverse_sort=false&page=1&size=20&Appid=$appId&Apikey=$apiKey');
+    print('Fetching product from: $uri');
+    final response = await http.get(uri);
+    try {
+      if (response.statusCode == 200) {
+        var item = json.decode(response.body);
+        return item;
+      } else {
+        print('Request failed');
+        //List<dynamic> items = json.decode(response.body)['items'];
+        // print('Fetched products: $items');
+        return {};
+      }
+    } catch (error) {
+      print(error);
+      return {};
+    }
+  }
+}

@@ -23,7 +23,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: listOfPages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         unselectedItemColor: Colors.grey,
@@ -55,6 +54,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
+      body: listOfPages[selectedIndex],
     );
   }
 }

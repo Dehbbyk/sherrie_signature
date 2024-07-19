@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/pages/product_detail_page.dart';
 import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
 import 'package:sherrie_signature/pages/widgets/more_product_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
@@ -91,7 +92,7 @@ class ProductListPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                JustForYouSlider(),
+                //JustForYouSlider(),
                 Expanded(
                   child: FutureBuilder<List<dynamic>>(
                     future: context.read<ProductProvider>().productService.fetchProduct(),
@@ -182,6 +183,7 @@ class ProductListPage extends StatelessWidget {
                   price = 'LRD ${ngnPricesList[0].toString()}';
                 }
                 final productName = product["name"] ?? 'Unnamed Product';
+                final id = product['id'];
                 return Container(
                   width: screenWidth/2,
                   margin: EdgeInsets.symmetric(horizontal: 8.0),
@@ -189,13 +191,17 @@ class ProductListPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        placeholder: (context, url) => CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                        height: screenHeight / 8,
-                        width: screenWidth,
-                        fit: BoxFit.cover,
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: CachedNetworkImage(
+                          imageUrl: imageUrl,
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Text(
                         productName,
@@ -225,7 +231,7 @@ class ProductListPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ProductDescriptionPage()),
+                                MaterialPageRoute(builder: (context) => ProductDetailPage(id: id)),
                               );
                             },
                             child: Text(

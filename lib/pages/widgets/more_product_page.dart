@@ -76,34 +76,24 @@ class MoreProductsPage extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               IconButton(
-                                  onPressed: (){
-                                    if (inWishlist){
-                                      productProvider.removeFromWishlist(product);
-                                    }else{
-                                      productProvider.addToWishlist(product);
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context){
-                                            return AlertDialog(
-                                              content: Text('Product successfully added to your wishlist'),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: (){
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: Text('OK'),
-                                                ),
-                                              ]
-                                            );
-                                          }
-                                      );
-                                    }
-                                  },
-                                  icon: Icon(
-                                    inWishlist ? Icons.heart_broken : Icons.heart_broken_outlined,
-                                    color: inWishlist ? Colors.red : null,
-                                  )
-                              )
+                                onPressed: () {
+                                  if (inWishlist) {
+                                    productProvider.removeFromWishlist(product);
+                                  } else {
+                                    productProvider.addToWishlist(product);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Product successfully added to your wishlist'),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  }
+                                },
+                                icon: Icon(
+                                  inWishlist ? Icons.favorite : Icons.favorite_outline,
+                                  color: inWishlist ? Colors.red : null,
+                                ),
+                              ),
                             ],
                           ),
                           Row(

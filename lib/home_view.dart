@@ -15,7 +15,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   var listOfPages = [
       ProductListPage(),
-    const WishList(),
+     WishList(),
     const Profile(),
     const Search(),
   ];
@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
           label: "Home"
         ),
         BottomNavigationBarItem(
-        icon: Icon(Icons.heart_broken_sharp
+        icon: Icon(Icons.favorite_outline
         ),
         label: "Wishlist"
       ),

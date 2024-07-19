@@ -51,7 +51,6 @@ class _AddToCartPageState extends State<AddToCartPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    color: Colors.green[100],
                     padding: EdgeInsets.all(16),
                     child: Center(
                       child: CachedNetworkImage(

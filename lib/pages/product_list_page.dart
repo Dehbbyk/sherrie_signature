@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
+import 'package:sherrie_signature/pages/order_history.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
 import 'package:sherrie_signature/pages/product_detail_page.dart';
 import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
@@ -39,7 +40,16 @@ class ProductListPage extends StatelessWidget {
                     );
                   },
                   icon: Icon(Icons.shopping_cart_outlined),
-                )
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => OrderHistory()),
+                    );
+                  },
+                  icon: Icon(Icons.history_rounded),
+                ),
               ],
             ),
             body: Column(

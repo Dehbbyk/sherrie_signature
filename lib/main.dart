@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ProductProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ProductListPage(),//HomeView()
+        home: HomeView(),//HomeView()
       ),
     );
   }

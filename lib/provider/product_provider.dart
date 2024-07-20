@@ -34,4 +34,6 @@ class ProductProvider with ChangeNotifier {
       _cart.remove(product);
       notifyListeners();
   }
+  final List<dynamic> _orders = [];
+  List<dynamic> get orders => _orders;
 }

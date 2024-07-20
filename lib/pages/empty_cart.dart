@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/pages/product_detail_page.dart';
 import 'package:sherrie_signature/pages/product_list_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -194,7 +195,7 @@ class EmptyCartPage extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ProductDescriptionPage(),
+                                              ProductDetailPage(id:'id'),
                                         ),
                                       );
                                     },

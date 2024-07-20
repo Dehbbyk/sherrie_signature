@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
-import 'package:sherrie_signature/pages/order_history.dart';
-import 'package:sherrie_signature/pages/product_description_page.dart';
-import 'package:sherrie_signature/pages/product_detail_page.dart';
-import 'package:sherrie_signature/pages/widgets/just_for_you_slider.dart';
+import 'package:sherrie_signature/pages/order_history_page.dart';
 import 'package:sherrie_signature/pages/widgets/more_product_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
@@ -45,7 +42,7 @@ class ProductListPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderHistory()),
+                      MaterialPageRoute(builder: (context) => OrderHistoryPage()),
                     );
                   },
                   icon: Icon(Icons.history_rounded),
@@ -92,17 +89,17 @@ class ProductListPage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => MoreProductsPage()),
-                            );
-                          },
-                          icon: Icon(Icons.keyboard_arrow_right))
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MoreProductsPage()),
+                          );
+                        },
+                        icon: Icon(Icons.keyboard_arrow_right),
+                      ),
                     ],
                   ),
                 ),
-                //JustForYouSlider(),
                 Expanded(
                   child: FutureBuilder<List<dynamic>>(
                     future: context.read<ProductProvider>().productService.fetchProduct(),
@@ -132,9 +129,9 @@ class ProductListPage extends StatelessWidget {
                         return ListView(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           children: [
-                            _buildCategorySection('Deals', deals, screenHeight, screenWidth, context),
-                            _buildCategorySection('Our Collections', ourCollections, screenHeight, screenWidth, context),
-                            _buildCategorySection('You Might Like', youMightLike, screenHeight, screenWidth, context),
+                            _buildCategorySection('Deals', deals, screenHeight, screenWidth, context, productProvider),
+                            _buildCategorySection('Our Collections', ourCollections, screenHeight, screenWidth, context, productProvider),
+                            _buildCategorySection('You Might Like', youMightLike, screenHeight, screenWidth, context, productProvider),
                           ],
                         );
                       }
@@ -149,7 +146,7 @@ class ProductListPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCategorySection(String title, List<dynamic> products, double screenHeight, double screenWidth, BuildContext context) {
+  Widget _buildCategorySection(String title, List<dynamic> products, double screenHeight, double screenWidth, BuildContext context, ProductProvider productProvider) {
     if (products.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
@@ -174,11 +171,11 @@ class ProductListPage extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Container(
-            height: screenHeight / 10,
+            height: screenHeight * 0.3,
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.7,
                 crossAxisSpacing: 8.0,
                 mainAxisSpacing: 8.0,
               ),
@@ -194,61 +191,91 @@ class ProductListPage extends StatelessWidget {
                 }
                 final productName = product["name"] ?? 'Unnamed Product';
                 final id = product['id'];
+                bool inWishlist = productProvider.wishlist.contains(product);
+
                 return Container(
-                  width: screenWidth/2,
+                  width: screenWidth / 2,
                   margin: EdgeInsets.symmetric(horizontal: 8.0),
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: CachedNetworkImage(
-                          imageUrl: imageUrl,
-                          placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                          height: 50,
-                          width: 50,
-                          fit: BoxFit.cover,
-                        ),
+                      CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        height: screenHeight * 0.15, // Adjust the height to fit the image properly
+                        width: double.infinity,
+                        fit: BoxFit.cover,
                       ),
+                      SizedBox(height: 8.0),
                       Text(
                         productName,
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 12,
                           color: Colors.grey,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
+                      SizedBox(height: 4.0),
+                      Text(
+                        price,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            price,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                          IconButton(
+                            onPressed: () {
+                              if (inWishlist) {
+                                productProvider.removeFromWishlist(product);
+                              } else {
+                                productProvider.addToWishlist(product);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Product successfully added to your wishlist'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+                              }
+                            },
+                            icon: Icon(
+                              inWishlist ? Icons.favorite : Icons.favorite_outline,
+                              color: inWishlist ? Colors.red : null,
                             ),
                           ),
                           TextButton(
                             style: TextButton.styleFrom(
                               backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ProductDetailPage(id: id)),
-                              );
+                              // Handle Add to Cart button press
                             },
                             child: Text(
                               'Add to Cart',
                               style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w400),
+                                color: Colors.green,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ],

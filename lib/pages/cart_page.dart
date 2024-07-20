@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sherrie_signature/pages/empty_cart.dart';
+import 'package:sherrie_signature/pages/filled_cart_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final String id;
+  const CartPage({super.key, required this.id});
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -22,13 +25,52 @@ class _CartPageState extends State<CartPage> {
           title: Text('Cart'),
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.shopping_cart),
-            )
+              onPressed: () {
+                if (productProvider.cart.isEmpty) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EmptyCartPage()),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FilledCartPage(id: 'id')), // Navigate to CartPage
+                  );
+                }
+              },
+              icon: Stack(
+                children: [
+                  Icon(Icons.shopping_cart_outlined),
+                  if (productProvider.cartCount > 0)
+                    Positioned(
+                      right: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(1),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth: 12,
+                          minHeight: 12,
+                        ),
+                        child: Text(
+                          '${productProvider.cartCount}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 8,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ],
         ),
-        body: FutureBuilder<List<dynamic>>(
-          future: context.read<ProductProvider>().productService.fetchProduct(),
+        body: FutureBuilder<Map<String, dynamic>>(
+          future: context.read<ProductProvider>().productService.fetchOneProduct(widget.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -37,7 +79,7 @@ class _CartPageState extends State<CartPage> {
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return Center(child: Text('No products available.'));
             } else {
-              List<dynamic> cartItems = snapshot.data!;
+              List cartItems = productProvider.cart;
               double subTotal = cartItems.fold(
                 0.0,
                     (sum, item) =>
@@ -130,7 +172,7 @@ class _CartPageState extends State<CartPage> {
                                             icon: Icon(Icons.delete),
                                             onPressed: () {
                                               setState(() {
-                                                cartItems.removeAt(index);
+                                                cartItems.remove(index);
                                               });
                                             },
                                           ),

@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sherrie_signature/pages/product_description_page.dart';
-import 'package:sherrie_signature/pages/wish_list.dart';
+import 'package:sherrie_signature/pages/product_detail_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class MoreProductsPage extends StatelessWidget {
@@ -31,13 +30,14 @@ class MoreProductsPage extends StatelessWidget {
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.75,
+                    childAspectRatio: 0.7,
                     crossAxisSpacing: 8.0,
                     mainAxisSpacing: 8.0,
                   ),
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     var product = snapshot.data![index];
+                    final id = product['id'];
                     const img = "http://api.timbu.cloud/images/";
                     String imageUrl = '$img${product?["photos"]?[0]?["url"] ?? ''}';
                     List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
@@ -48,9 +48,20 @@ class MoreProductsPage extends StatelessWidget {
                     final productName = product["name"] ?? 'Unnamed Product';
                     final inWishlist = productProvider.isInWishlist(product);
                     return Container(
-                      width: screenWidth / 2,
-                      margin: EdgeInsets.symmetric(horizontal: 8.0),
-                      padding: EdgeInsets.all(16.0),
+                      margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -58,23 +69,33 @@ class MoreProductsPage extends StatelessWidget {
                             imageUrl: imageUrl,
                             placeholder: (context, url) => CircularProgressIndicator(),
                             errorWidget: (context, url, error) => Icon(Icons.error),
-                            height: screenHeight / 8,
-                            width: screenWidth,
+                            height: screenHeight * 0.15,
+                            width: double.infinity,
                             fit: BoxFit.cover,
                           ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            productName,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            price,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                productName,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
                               IconButton(
                                 onPressed: () {
                                   if (inWishlist) {
@@ -94,27 +115,15 @@ class MoreProductsPage extends StatelessWidget {
                                   color: inWishlist ? Colors.red : null,
                                 ),
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                price,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
                               TextButton(
                                 style: TextButton.styleFrom(
                                   backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                 ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => ProductDescriptionPage()),
+                                    MaterialPageRoute(builder: (context) => ProductDetailPage(id: id)),
                                   );
                                 },
                                 child: Text(

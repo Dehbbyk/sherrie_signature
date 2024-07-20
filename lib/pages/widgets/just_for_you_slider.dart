@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/product_description_page.dart';
+import 'package:sherrie_signature/pages/product_detail_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 class JustForYouSlider extends StatelessWidget {
   const JustForYouSlider({super.key});
@@ -84,7 +85,7 @@ class JustForYouSlider extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      ProductDescriptionPage(),
+                                      ProductDetailPage(id: 'id'),
                                 ),
                               );
                             },

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
 import 'package:sherrie_signature/pages/order_history_page.dart';
+import 'package:sherrie_signature/pages/product_detail_page.dart';
 import 'package:sherrie_signature/pages/widgets/more_product_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
@@ -184,7 +185,7 @@ class ProductListPage extends StatelessWidget {
                 var product = products[index];
                 const img = "http://api.timbu.cloud/images/";
                 String imageUrl = '$img${product?["photos"]?[0]?["url"] ?? ''}';
-                List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
+                List<dynamic> ngnPricesList = product["current_price"][0]?["LRD"] ?? [];
                 String price = 'LRD 100';
                 if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
                   price = 'LRD ${ngnPricesList[0].toString()}';
@@ -268,10 +269,13 @@ class ProductListPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                             ),
                             onPressed: () {
-                              // Handle Add to Cart button press
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ProductDetailPage(id: id)),
+                              );
                             },
                             child: Text(
-                              'Add to Cart',
+                              'Details',
                               style: TextStyle(
                                 color: Colors.green,
                                 fontWeight: FontWeight.w400,

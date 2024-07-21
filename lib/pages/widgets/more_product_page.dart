@@ -40,7 +40,7 @@ class MoreProductsPage extends StatelessWidget {
                     final id = product['id'];
                     const img = "http://api.timbu.cloud/images/";
                     String imageUrl = '$img${product?["photos"]?[0]?["url"] ?? ''}';
-                    List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
+                    List<dynamic> ngnPricesList = product["current_price"][0]["LRD"] ?? [];
                     String price = 'LRD 100';
                     if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
                       price = 'LRD ${ngnPricesList[0].toString()}';
@@ -127,7 +127,7 @@ class MoreProductsPage extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  'Add to Cart',
+                                  'Details',
                                   style: TextStyle(
                                       color: Colors.green,
                                       fontWeight: FontWeight.w400),

@@ -1,54 +1,60 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class OrderDetailsPage extends StatelessWidget {
-  final int orderId;
-  final String orderDate;
-  final String productName;
-  final String imageUrl;
-  final String price;
+  final dynamic order;
 
-  OrderDetailsPage({
-    required this.orderId,
-    required this.orderDate,
-    required this.productName,
-    required this.imageUrl,
-    required this.price,
-  });
+  OrderDetailsPage({required this.order});
 
   @override
   Widget build(BuildContext context) {
+    final productName = order['name'] ?? 'Unknown Product';
+    final date = order['date'] ?? 'Unknown Date';
+    final imageUrl = order['image'] ?? '';
+    final description = order['description'] ?? 'No description available';
+    final price = order['price'] ?? 0.0;
+    final quantity = order['quantity'] ?? 1;
+    final totalAmount = price * quantity;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order #$orderId Details'),
+        title: Text('Order Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
+            imageUrl.isNotEmpty
+                ? CachedNetworkImage(
               imageUrl: imageUrl,
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
-              height: 200.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            )
+                : Icon(Icons.image, size: 100),
+            SizedBox(height: 16),
+            Text(
+              productName,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            SizedBox(height: 20),
-            Text('Order ID: $orderId', style: TextStyle(fontSize: 18)),
-            Text('Date: $orderDate', style: TextStyle(fontSize: 18)),
-            Text('Product: $productName', style: TextStyle(fontSize: 18)),
-            Text('Total: $price', style: TextStyle(fontSize: 18)),
-            SizedBox(height: 20),
-            Text('Products:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            ListTile(
-              title: Text(productName),
-              subtitle: Text('Quantity: 2 - Price: \$50.0'),
-            ),
-            ListTile(
-              title: Text('Product 2'),
-              subtitle: Text('Quantity: 1 - Price: \$50.0'),
+            SizedBox(height: 8),
+            Text('Date: $date'),
+            SizedBox(height: 8),
+            Text(description),
+            SizedBox(height: 8),
+            Text('Price: \$$price'),
+            SizedBox(height: 8),
+            Text('Quantity: $quantity'),
+            SizedBox(height: 8),
+            Text(
+              'Total Amount Paid: \$$totalAmount',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

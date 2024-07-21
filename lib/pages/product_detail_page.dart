@@ -77,13 +77,14 @@ class ProductDetailPage extends StatelessWidget {
               return Center(child: Text('No products available.'));
             } else {
               var product = snapshot.data!;
+              var amount = product['current_price'].toString();
               const img = "http://api.timbu.cloud/images/";
               String imageUrl = '$img${product?["photos"]?[0]?["url"] ?? ''}';
-              List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
-              String price = 'LRD 100';
-              if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
-                price = 'LRD ${ngnPricesList[0].toString()}';
-              }
+              // List<dynamic> ngnPricesList = product?["current_price"]?[0]?["NGN"] ?? [];
+              final price = product['current_price'].toString();
+              // if (ngnPricesList != null && ngnPricesList.isNotEmpty) {
+              //   price = 'LRD ${ngnPricesList[0].toString()}';
+              // }
               final productName = product["name"] ?? 'Unnamed Product';
               final productDescription = product['description'] ?? "No description available";
               return SingleChildScrollView(

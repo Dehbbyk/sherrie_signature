@@ -43,7 +43,8 @@ This is the order summary page, from the checkpout page you click checkout to yo
 
 On the home screen, there are two icons at the top bar. These are empty cart and order history icons. The empty cart navigates to the empty cart screen while the order history navigates to the order history screen as displayed below.
 ![image](https://github.com/user-attachments/assets/8d7ba900-f860-4c84-ad0c-d4e73d55a3a6)
-![image](https://github.com/user-attachments/assets/ebef0ea4-8c26-418a-a8e2-e2c810938368)
+![image]![image](https://github.com/user-attachments/assets/86d64877-54c9-42a2-a7b4-113326a6b1a2)
+
 
 
 
@@ -55,13 +56,14 @@ You can add products to favourite by clicking the favourite icon on each product
 
 
 Also, when an history is clicked on the order history, it navigates to the detail order history.
-![image](https://github.com/user-attachments/assets/cd2e3002-e79d-49d3-9e83-4f077d943510)
+![image]![image](https://github.com/user-attachments/assets/6bc2362e-2033-48c2-a13e-77e8441e40d8)
+
 
 
 
 
 ## APK Download
-Download the APK file to install the app on your Android device: [APK Download Link]([https://drive.google.com/drive/folders/1gWxj1JYqUubWFfpclgkF3MP2H41LhKmd?usp=sharing](https://drive.google.com/drive/folders/1kgm3djYNkccy0z3jnizktn-kSp9JCj21?usp=sharing))
+Download the APK file to install the app on your Android device: [APK Download Link](https://drive.google.com/drive/folders/1kgm3djYNkccy0z3jnizktn-kSp9JCj21?usp=sharing)
 
 ## Demo
 Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]]([https://appetize.io/app/b_qrh7gq4o6355jw4lmpl6urqzta](https://appetize.io/apps/android/com.example.dok_store)))

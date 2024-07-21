@@ -61,7 +61,7 @@ Also, when an history is clicked on the order history, it navigates to the detai
 
 
 ## APK Download
-Download the APK file to install the app on your Android device: [APK Download Link]([https://drive.google.com/drive/folders/1gWxj1JYqUubWFfpclgkF3MP2H41LhKmd?usp=sharing](https://drive.google.com/drive/folders/1kgm3djYNkccy0z3jnizktn-kSp9JCj21?usp=sharing))
+Download the APK file to install the app on your Android device: [APK Download Link](https://drive.google.com/drive/folders/1kgm3djYNkccy0z3jnizktn-kSp9JCj21?usp=sharing)
 
 ## Demo
 Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]]([https://appetize.io/app/b_qrh7gq4o6355jw4lmpl6urqzta](https://appetize.io/apps/android/com.example.dok_store)))

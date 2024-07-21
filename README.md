@@ -4,40 +4,67 @@ This is a shopping app built with flutter. The app allows users to browse produc
 
 ## Features
 - Product Listing: Browse through a list of available products
+- Wishlist: Easy way to add products to wishlist
 - Product Details: View detailed information about a selected product
 - Add to Cart: Add products to your cart
 - Cart Management: Increase or decrease the quantity of the product
 - Checkout: Proceed to checkout with the selected products.
+- Order History: Documented history of orders
 
 ## Screenshot
-- ![image](![home](![image](https://github.com/user-attachments/assets/a0d33623-ca9f-4548-ac7b-d62c295f7401)
+- ![Home screen](https://github.com/user-attachments/assets/d1b48cfa-0e80-4d44-aacf-ccb2f06aeccb)
+
 
   
-This is the image of the home view. The home view is still under construction due to inability to fecth categorized products from the timbu api.
-![product description](https://github.com/user-attachments/assets/6824b60f-9662-4e01-b32e-a1ae42c5c268)
-
-
-Product description showing details of the each product. You can navigate to this page by clicking on the "ADD TO CART' on each product fron the home page
-![add to cart](https://github.com/user-attachments/assets/e32c5356-d76f-41df-9eb0-c151340f92d9)
-
-
-You can add your products here as well as click the empty cart at the right hand corner to navigate you to the another screen
-![empty cart](https://github.com/user-attachments/assets/8b6f0e19-df97-4584-abae-b00a5c63814e)
+This is the image of the home view. This shows the lsit of several categories at Sherries signature.
+!![More products](https://github.com/user-attachments/assets/e44362b3-2ae0-47ae-a32c-063c30d28b14)
 
 
 
-Empty cart, displaying that no product has been added yet. Click on the empty cart icon on the product description page to access this page.
-![checkout cart](https://github.com/user-attachments/assets/3c248ccb-99ed-42f7-a7ba-aff22273fe38)
+The Just for you icon navigates to more products where you see all the products available in store.
+![Product details page](![image](https://github.com/user-attachments/assets/5aa30d14-f2f6-43b5-ada5-19d62bd5f3f7)
 
 
-This is the checkout page, from the add to cart page you click checkout to check out the products you've purchased.
+
+
+You get to see the details of each product from this page. click on the Add to cart icon to conitnue your shopping expience
+![Add to cart](https://github.com/user-attachments/assets/ef33a450-eba7-445d-9f42-0ecda22edbb3)
+
+
+After adding to cart you can proceed to checkout your order
+![checkout cart](![image](https://github.com/user-attachments/assets/246763ec-ba19-4879-b853-2df7bcae4b08)
+
+
+
+This is the order summary page, from the checkpout page you click checkout to you proceed to confirm your order.
+![image](https://github.com/user-attachments/assets/663275cf-41ef-4697-a4aa-7efc280cde0e)
+
+
+
+On the home screen, there are two icons at the top bar. These are empty cart and order history icons. The empty cart navigates to the empty cart screen while the order history navigates to the order history screen as displayed below.
+![image](https://github.com/user-attachments/assets/8d7ba900-f860-4c84-ad0c-d4e73d55a3a6)
+![image](https://github.com/user-attachments/assets/ebef0ea4-8c26-418a-a8e2-e2c810938368)
+
+
+
+
+![image](https://github.com/user-attachments/assets/e156ef70-a1fb-4970-933d-732ef7242ab9)
+You can add products to favourite by clicking the favourite icon on each product from the home page
+
+
+
+
+Also, when an history is clicked on the order history, it navigates to the detail order history.
+![image](https://github.com/user-attachments/assets/cd2e3002-e79d-49d3-9e83-4f077d943510)
+
+
 
 
 ## APK Download
-Download the APK file to install the app on your Android device: [APK Download Link](https://drive.google.com/drive/folders/1gWxj1JYqUubWFfpclgkF3MP2H41LhKmd?usp=sharing)
+Download the APK file to install the app on your Android device: [APK Download Link]([https://drive.google.com/drive/folders/1gWxj1JYqUubWFfpclgkF3MP2H41LhKmd?usp=sharing](https://drive.google.com/drive/folders/1kgm3djYNkccy0z3jnizktn-kSp9JCj21?usp=sharing))
 
 ## Demo
-Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]](https://appetize.io/app/b_qrh7gq4o6355jw4lmpl6urqzta))
+Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]]([https://appetize.io/app/b_qrh7gq4o6355jw4lmpl6urqzta](https://appetize.io/apps/android/com.example.dok_store)))
 
 ## Setup Instructions
   Clone the repository

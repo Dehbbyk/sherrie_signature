@@ -19,10 +19,6 @@ class OrderHistoryPage extends StatelessWidget {
               var order = productProvider.orders[index];
               var product = order['product'];
 
-              // Debug prints
-              print('Order: $order');
-              print('Product: $product');
-
               if (product == null || product is! Map) {
                 return ListTile(
                   title: Text('Invalid product data'),
@@ -31,7 +27,7 @@ class OrderHistoryPage extends StatelessWidget {
               }
 
               final img = "http://api.timbu.cloud/images/";
-              String imageUrl = '$img${product["photos"]?[0]?["url"]}';
+              String imageUrl = '$img${product["photos"]?[0]?["url"] ?? ''}';
               final price = product['current_price'].toString();
               final productName = product["name"] ?? 'Unknown Product';
               final date = order['date'] ?? 'Unknown Date';
@@ -51,7 +47,15 @@ class OrderHistoryPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OrderDetailsPage(order: order),
+                      builder: (context) => OrderDetailsPage(
+                        order: {
+                          'name': productName,
+                          'date': date,
+                          'image': imageUrl,
+                          'price': price,
+                          'quantity': quantity,
+                        },
+                      ),
                     ),
                   );
                 },

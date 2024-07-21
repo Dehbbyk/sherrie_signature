@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sherrie_signature/pages/product_list_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';
 
 class OrderSummaryPage extends StatelessWidget {
@@ -38,11 +39,10 @@ class OrderSummaryPage extends StatelessWidget {
                       final price = product['current_price'].toString();
                       final productName = product["name"];
                       final quantity = productProvider.getQuantity(product);
-
                       return ListTile(
                         title: Text(productName),
                         subtitle: Text('Quantity: $quantity'),
-                        trailing: Text('\$$price'),
+                        trailing: Text('LRD $price'),
                       );
                     },
                   ),
@@ -54,7 +54,7 @@ class OrderSummaryPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    trailing: Text('\$$totalPrice'),
+                    trailing: Text('LRD $totalPrice'),
                   ),
                   ListTile(
                     title: Text(
@@ -63,7 +63,7 @@ class OrderSummaryPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    trailing: Text('\$$deliveryFee'),
+                    trailing: Text('LRD $deliveryFee'),
                   ),
                   Divider(),
                   ListTile(
@@ -72,7 +72,7 @@ class OrderSummaryPage extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     trailing: Text(
-                      '\$$totalAmount',
+                      'LRD $totalAmount',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -127,17 +127,19 @@ class OrderSummaryPage extends StatelessWidget {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      final order = {
-                        'product': productProvider.cart,
-                        'date': DateTime.now().toString(),
-                      };
-                      productProvider.addOrder(order);
+                      for (var product in productProvider.cart) {
+                        final order = {
+                          'product': product,
+                          'date': DateTime.now().toString(),
+                        };
+                        productProvider.addOrder(order);
+                      }
+
+                      productProvider.clearCart();
+
                       showDialog(
                         context: context,
                         builder: (context) {
-                          Future.delayed(Duration(minutes: 1), () {
-                            Navigator.of(context).pop(true);
-                          });
                           return AlertDialog(
                             title: Text('Order Confirmed'),
                             content: Text('Your order has been successfully placed!'),
@@ -145,7 +147,14 @@ class OrderSummaryPage extends StatelessWidget {
                               TextButton(
                                 child: Text('OK'),
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop(); // Close the dialog
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductListPage(),
+                                    ),
+                                        (Route<dynamic> route) => false,
+                                  );
                                 },
                               ),
                             ],

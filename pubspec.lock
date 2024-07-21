@@ -147,14 +147,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  foundation:
-    dependency: "direct main"
-    description:
-      name: foundation
-      sha256: "6f1fda07bd2a422145724b0f94ee68fabac95fabff982d5f334fe1a38cbed6a7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.5"
   http:
     dependency: "direct main"
     description:
@@ -252,7 +244,7 @@ packages:
     source: hosted
     version: "1.9.0"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: c9e7d3a4cd1410877472158bee69963a4579f78b68c65a2b7d40d1a7a88bb161
@@ -353,7 +345,7 @@ packages:
     source: hosted
     version: "7.0.0"
   sqflite:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sqflite
       sha256: a43e5a27235518c03ca238e7b4732cf35eabe863a369ceba6cbefa537a66f16d

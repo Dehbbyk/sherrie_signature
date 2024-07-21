@@ -17,10 +17,25 @@ class OrderHistoryPage extends StatelessWidget {
             itemCount: productProvider.orders.length,
             itemBuilder: (context, index) {
               var order = productProvider.orders[index];
-              const img = "http://api.timbu.cloud/images/";
-              String imageUrl = '$img${order["photos"]?[0]?["url"] ?? ""}';
-              final productName = order['name'] ?? 'Unknown Product';
+              var product = order['product'];
+
+              // Debug prints
+              print('Order: $order');
+              print('Product: $product');
+
+              if (product == null || product is! Map) {
+                return ListTile(
+                  title: Text('Invalid product data'),
+                  subtitle: Text('Date: ${order['date'] ?? 'Unknown Date'}'),
+                );
+              }
+
+              final img = "http://api.timbu.cloud/images/";
+              String imageUrl = '$img${product["photos"]?[0]?["url"]}';
+              final price = product['current_price'].toString();
+              final productName = product["name"] ?? 'Unknown Product';
               final date = order['date'] ?? 'Unknown Date';
+              final quantity = productProvider.getQuantity(product);
 
               return ListTile(
                 leading: imageUrl.isNotEmpty
@@ -31,7 +46,7 @@ class OrderHistoryPage extends StatelessWidget {
                 )
                     : Icon(Icons.image),
                 title: Text(productName),
-                subtitle: Text(date),
+                subtitle: Text('Date: $date\nQuantity: $quantity\nPrice: LRD $price'),
                 onTap: () {
                   Navigator.push(
                     context,

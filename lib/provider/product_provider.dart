@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sherrie_signature/pages/database_helper.dart';
 import 'package:sherrie_signature/services/api_service.dart';
 
 class ProductProvider with ChangeNotifier {
@@ -101,8 +102,18 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addOrder(Map<String, dynamic> order) {
+  void addOrder(dynamic order) {
     _orders.add(order);
+    notifyListeners();
+  }
+
+  void loadOrders() async {
+    List<Map<String, dynamic>> ordersFromDb = await DatabaseHelper().getOrders();
+    _orders.addAll(ordersFromDb);
+    notifyListeners();
+  }
+  void clearCart() {
+    _cart.clear();
     notifyListeners();
   }
 }

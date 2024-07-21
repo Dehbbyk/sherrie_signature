@@ -11,7 +11,7 @@ class OrderDetailsPage extends StatelessWidget {
     final productName = order['name'] ?? 'Unknown Product';
     final date = order['date'] ?? 'Unknown Date';
     final imageUrl = order['image'] ?? '';
-    final description = order['description'] ?? 'No description available';
+    // final description = order['description'] ?? 'No description available';
     final price = order['price'] ?? 0.0;
     final quantity = order['quantity'] ?? 1;
     final totalAmount = price * quantity;
@@ -42,15 +42,15 @@ class OrderDetailsPage extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text('Date: $date'),
+            // SizedBox(height: 8),
+            // Text(description),
             SizedBox(height: 8),
-            Text(description),
-            SizedBox(height: 8),
-            Text('Price: \$$price'),
+            Text('Price: LRD $price'),
             SizedBox(height: 8),
             Text('Quantity: $quantity'),
             SizedBox(height: 8),
             Text(
-              'Total Amount Paid: \$$totalAmount',
+              'Total Amount Paid: LRD $totalAmount',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

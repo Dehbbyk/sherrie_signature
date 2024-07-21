@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sherrie_signature/pages/check_out_page.dart';
 import 'package:sherrie_signature/pages/empty_cart.dart';
 import 'package:sherrie_signature/pages/filled_cart_page.dart';
 import 'package:sherrie_signature/provider/product_provider.dart';

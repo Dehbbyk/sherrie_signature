@@ -4,10 +4,12 @@ This is a shopping app built with flutter. The app allows users to browse produc
 
 ## Features
 - Product Listing: Browse through a list of available products
+- Wishlist: Easy way to add products to wishlist
 - Product Details: View detailed information about a selected product
 - Add to Cart: Add products to your cart
 - Cart Management: Increase or decrease the quantity of the product
 - Checkout: Proceed to checkout with the selected products.
+- Order History: Documented history of orders
 
 ## Screenshot
 - ![Home screen](https://github.com/user-attachments/assets/d1b48cfa-0e80-4d44-aacf-ccb2f06aeccb)

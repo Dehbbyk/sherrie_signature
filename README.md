@@ -10,15 +10,26 @@ This is a shopping app built with flutter. The app allows users to browse produc
 - Checkout: Proceed to checkout with the selected products.
 
 ## Screenshot
-- ![image](![home](![image](https://github.com/user-attachments/assets/a0d33623-ca9f-4548-ac7b-d62c295f7401)
+- ![image](![home](![image](https://github.com/user-attachments/assets/a47f82bb-59b4-4859-8186-34140c6cfac7)
+)
 
   
-This is the image of the home view. The home view is still under construction due to inability to fecth categorized products from the timbu api.
-![product description](https://github.com/user-attachments/assets/6824b60f-9662-4e01-b32e-a1ae42c5c268)
+This is the image of the home view. This shows the lsit of several categories at Sherries signature.
+!![More products](https://github.com/user-attachments/assets/e44362b3-2ae0-47ae-a32c-063c30d28b14)
 
 
-Product description showing details of the each product. You can navigate to this page by clicking on the "ADD TO CART' on each product fron the home page
-![add to cart](https://github.com/user-attachments/assets/e32c5356-d76f-41df-9eb0-c151340f92d9)
+
+The Just for you icon navigates to more products where you see all the products available in store.
+![Product details page](![image](https://github.com/user-attachments/assets/5aa30d14-f2f6-43b5-ada5-19d62bd5f3f7)
+
+
+
+
+You get to see the details of each product from this page. click on the Add to cart icon to conitnue your shopping expience
+![Add to cart](https://github.com/user-attachments/assets/ef33a450-eba7-445d-9f42-0ecda22edbb3)
+
+
+After adding to cart you can proceed to checkout your order
 
 
 You can add your products here as well as click the empty cart at the right hand corner to navigate you to the another screen

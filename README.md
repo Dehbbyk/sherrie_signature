@@ -10,8 +10,8 @@ This is a shopping app built with flutter. The app allows users to browse produc
 - Checkout: Proceed to checkout with the selected products.
 
 ## Screenshot
-- ![image](![home](![image](https://github.com/user-attachments/assets/a47f82bb-59b4-4859-8186-34140c6cfac7)
-)
+- ![Home screen](https://github.com/user-attachments/assets/d1b48cfa-0e80-4d44-aacf-ccb2f06aeccb)
+
 
   
 This is the image of the home view. This shows the lsit of several categories at Sherries signature.
@@ -30,25 +30,39 @@ You get to see the details of each product from this page. click on the Add to c
 
 
 After adding to cart you can proceed to checkout your order
-
-
-You can add your products here as well as click the empty cart at the right hand corner to navigate you to the another screen
-![empty cart](https://github.com/user-attachments/assets/8b6f0e19-df97-4584-abae-b00a5c63814e)
+![checkout cart](![image](https://github.com/user-attachments/assets/246763ec-ba19-4879-b853-2df7bcae4b08)
 
 
 
-Empty cart, displaying that no product has been added yet. Click on the empty cart icon on the product description page to access this page.
-![checkout cart](https://github.com/user-attachments/assets/3c248ccb-99ed-42f7-a7ba-aff22273fe38)
+This is the order summary page, from the checkpout page you click checkout to you proceed to confirm your order.
+![image](https://github.com/user-attachments/assets/663275cf-41ef-4697-a4aa-7efc280cde0e)
 
 
-This is the checkout page, from the add to cart page you click checkout to check out the products you've purchased.
+
+On the home screen, there are two icons at the top bar. These are empty cart and order history icons. The empty cart navigates to the empty cart screen while the order history navigates to the order history screen as displayed below.
+![image](https://github.com/user-attachments/assets/8d7ba900-f860-4c84-ad0c-d4e73d55a3a6)
+![image](https://github.com/user-attachments/assets/ebef0ea4-8c26-418a-a8e2-e2c810938368)
+
+
+
+
+![image](https://github.com/user-attachments/assets/e156ef70-a1fb-4970-933d-732ef7242ab9)
+You can add products to favourite by clicking the favourite icon on each product from the home page
+
+
+
+
+Also, when an history is clicked on the order history, it navigates to the detail order history.
+![image](https://github.com/user-attachments/assets/cd2e3002-e79d-49d3-9e83-4f077d943510)
+
+
 
 
 ## APK Download
-Download the APK file to install the app on your Android device: [APK Download Link](https://drive.google.com/drive/folders/1gWxj1JYqUubWFfpclgkF3MP2H41LhKmd?usp=sharing)
+Download the APK file to install the app on your Android device: [APK Download Link]([https://drive.google.com/drive/folders/1gWxj1JYqUubWFfpclgkF3MP2H41LhKmd?usp=sharing](https://drive.google.com/drive/folders/1kgm3djYNkccy0z3jnizktn-kSp9JCj21?usp=sharing))
 
 ## Demo
-Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]](https://appetize.io/app/b_qrh7gq4o6355jw4lmpl6urqzta))
+Check out the demo of the app on Appetize.io: [Appetize.io Demo Link([![image]]([https://appetize.io/app/b_qrh7gq4o6355jw4lmpl6urqzta](https://appetize.io/apps/android/com.example.dok_store)))
 
 ## Setup Instructions
   Clone the repository
